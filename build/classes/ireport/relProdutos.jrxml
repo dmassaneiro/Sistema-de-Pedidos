@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relProdutos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1cdeb239-c2cd-48fd-93a2-ed1c7ab7ec6c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="dtInicial" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{dtInicial}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dtFinal" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{dtFinal}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT venda_has_produtos.produtos_id,produtos.nome ,sum(quantidade) as Qtd
+FROM venda_has_produtos
+inner join produtos on venda_has_produtos.produtos_id = produtos.id
+inner join venda on venda_has_produtos.venda_id = venda.id
+where venda_has_produtos.produtos_id >= 0 and  venda.data between $P{dtInicial} and $P{dtFinal}
+GROUP BY venda_has_produtos.produtos_id]]>
+	</queryString>
+	<field name="produtos_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Qtd" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="395" y="0" width="71" height="20" uuid="74ae29c2-dd56-4830-b75f-32361f8ebc9d"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Emitido em:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="138" y="40" width="14" height="20" uuid="21601a06-9a04-46d3-992b-3fc74eb74745"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[a]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yy">
+				<reportElement x="466" y="0" width="89" height="20" uuid="a166f605-9780-4637-b77a-59e7d5ee38bd"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="67" y="40" width="71" height="20" uuid="fb0c4504-8efc-4495-b24a-bd3bf0808a97"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dtInicial}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="20" width="329" height="20" uuid="89965596-171a-4eb3-87cc-13ff7b43d311"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Extrato de Produtos Movimentados]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="67" height="20" uuid="4f21f676-8616-4e8c-89df-22af4622591f"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Período de ]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="152" y="40" width="100" height="20" uuid="dd531d5d-fc11-41bc-b76f-f4981358c036"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dtFinal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="182" height="20" uuid="54d77593-0faf-42ed-9389-60a38651eee2"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LIZZE EQUIPAMENTOS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="24" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="555" height="2" uuid="c8e5d728-dd6f-4524-be1e-29bb5f80a051"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="2" width="57" height="20" uuid="f93480cb-3adc-4eb4-a317-c9b4e256189e"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="152" y="2" width="100" height="20" uuid="5efae595-35b2-4cb0-bb1e-3a6ac9bd63b8"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Produto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="422" y="2" width="74" height="20" uuid="e516e37b-cbfb-4e5c-af7b-177256874740"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quantidade ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="22" width="555" height="1" uuid="aac138c9-adf2-4105-ae70-c11a04cb2fe7"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="2" width="57" height="20" uuid="3744ffdb-4b8d-4a6b-9f0e-dc0060b8be60"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{produtos_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="152" y="2" width="250" height="20" uuid="069f3a43-8f17-46ce-90b9-76ee1a54e61c"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement x="409" y="2" width="100" height="20" uuid="21c54afc-5101-42c3-b5fd-0d335a3ab096"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{Qtd}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
